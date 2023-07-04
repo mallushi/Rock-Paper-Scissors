@@ -16,28 +16,35 @@ function getPlayerChoice(){
 //and than returns a winner
 function playRound(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
-        return("Same choice. No points given. Play again.");
+        return("No points given.");
     }
     else if ((playerSelection === "rock") & (computerSelection === "paper")){
-        return("You lose! Paper beats Rock.");
+        return("You lose!");
     }
     else if ((playerSelection === "rock") & (computerSelection === "scissors")){
-        return("You win! Rock beats Scissors.");
+        return("You win!");
     }
     else if ((playerSelection === "paper") & (computerSelection === "rock")){
-        return("You win! Paper beats Rock.");
+        return("You win!");
     }
     else if ((playerSelection === "paper") & (computerSelection === "scissors")){
-        return("You lose! Scissors beat Paper.");
+        return("You lose!");
     }
     else if ((playerSelection === "scissors") & (computerSelection === "paper")){
-        return("You win! Scissors beat Paper.");
+        return("You win!");
     }
     else if ((playerSelection === "scissors") & (computerSelection === "rock")){
-        return("You lose! Rock beats Scissors.");
+        return("You lose!");
     }
 }
-
-const computerSelection = getComputerChoice();
-const playerSelection = getPlayerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game(){
+    let i = 0;
+    while (i<5){
+        const computerSelection = getComputerChoice();
+        const playerSelection = getPlayerChoice();
+        playRound(playerSelection, computerSelection);
+        console.log(playRound(playerSelection, computerSelection));
+        i++;
+    }
+}
+let winner = game();
