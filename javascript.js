@@ -42,9 +42,23 @@ function game(){
     while (i<5){
         const computerSelection = getComputerChoice();
         const playerSelection = getPlayerChoice();
-        playRound(playerSelection, computerSelection);
+        let result = playRound(playerSelection, computerSelection);
         console.log(playRound(playerSelection, computerSelection));
+        keepScore(result);
         i++;
     }
 }
+let playerScore = 0;
+let computerScore = 0;
+function keepScore(result){
+    if (result === "You win!"){
+        playerScore += 1;
+    }
+    else if (result === "You lose!"){
+        computerScore += 1;
+    }
+    console.log(computerScore);
+    console.log(playerScore);
+}
+
 let winner = game();
