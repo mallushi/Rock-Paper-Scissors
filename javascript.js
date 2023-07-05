@@ -69,7 +69,7 @@ function decideWinner(computerScore, playerScore){
         console.log("Result: " + playerScore + " - " + computerScore + "\nCongratulations! You won the game.")
     }
     else
-        console.log("YResult: " + playerScore + " - " + computerScore + "\nYou Have got equal score")
+        console.log("Result: " + playerScore + " - " + computerScore + "\nYou Have got equal score")
 }
 
 let fiveRounds = game();
