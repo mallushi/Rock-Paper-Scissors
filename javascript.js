@@ -16,25 +16,25 @@ function getPlayerChoice(){
 //and than returns a winner
 function playRound(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
-        return("No points given.");
+        return("Same choice. No points given.");
     }
     else if ((playerSelection === "rock") & (computerSelection === "paper")){
-        return("You lose!");
+        return("You lose! You get 0 score.");
     }
     else if ((playerSelection === "rock") & (computerSelection === "scissors")){
-        return("You win!");
+        return("You win! You get 1 score.");
     }
     else if ((playerSelection === "paper") & (computerSelection === "rock")){
-        return("You win!");
+        return("You win! You get 1 score.");
     }
     else if ((playerSelection === "paper") & (computerSelection === "scissors")){
-        return("You lose!");
+        return("You lose! You get 0 score.");
     }
     else if ((playerSelection === "scissors") & (computerSelection === "paper")){
-        return("You win!");
+        return("You win! You get 1 score.");
     }
     else if ((playerSelection === "scissors") & (computerSelection === "rock")){
-        return("You lose!");
+        return("You lose! You get 0 score.");
     }
 }
 function game(){
@@ -51,14 +51,26 @@ function game(){
 let playerScore = 0;
 let computerScore = 0;
 function keepScore(result){
-    if (result === "You win!"){
+    if (result === "You win! You get 1 score."){
         playerScore += 1;
     }
-    else if (result === "You lose!"){
+    else if (result === "You lose! You get 0 score."){
         computerScore += 1;
     }
     console.log(computerScore);
     console.log(playerScore);
 }
 
-let winner = game();
+function decideWinner(computerScore, playerScore){
+    if (computerScore > playerScore){
+        console.log("Result: " + playerScore + " - " + computerScore + "\nYou lost the game!")
+    }
+    else if (computerScore < playerScore){
+        console.log("Result: " + playerScore + " - " + computerScore + "\nCongratulations! You won the game.")
+    }
+    else
+        console.log("YResult: " + playerScore + " - " + computerScore + "\nYou Have got equal score")
+}
+
+let fiveRounds = game();
+let winner = decideWinner(computerScore, playerScore);
