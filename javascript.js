@@ -1,3 +1,31 @@
+let div = document.querySelector('div');
+    console.log(document.querySelector('div'))
+
+    let btnScissors = document.createElement('button');
+    btnScissors.textContent = 'scissors';
+    btnScissors.addEventListener('click', function() {
+        playRound('scissors', getComputerChoice());
+        //console.log( playRound('scissors', getComputerChoice()))
+    });
+
+    let btnPaper = document.createElement('button');
+    btnPaper.textContent = 'paper';
+    btnPaper.addEventListener('click', function() {
+        playRound('paper', getComputerChoice());
+        //console.log( playRound('paper', getComputerChoice()))
+    });
+
+    let btnRock = document.createElement('button');
+    btnRock.textContent = 'rock';
+    btnRock.addEventListener('click', function() {
+        playRound('rock', getComputerChoice());
+        //console.log( playRound('rock', getComputerChoice()))
+    });
+
+    div.appendChild(btnScissors);
+    div.appendChild(btnRock);
+    div.appendChild(btnPaper);
+
 //create a function to get a random choice from computer
 function getComputerChoice(){
     let choices = ['rock', 'paper', 'scissors'];
@@ -5,49 +33,38 @@ function getComputerChoice(){
     return choice;
 }
 
-//create a function to get players input and then convert the answer to lowercase
-function getPlayerChoice(){
-    let playerChoice = prompt("What is your choice: rock, paper or scissors?");
-    let answer = playerChoice.toLowerCase();
-    return answer;
-}
-
 //create a function that plays 1 round of the game with 2 parameters as computers selection and players selection 
 //and than returns a winner
 function playRound(playerSelection, computerSelection){
+    if (playerScore == 5 || computerScore == 5){
+            playerScore = 0;
+            computerScore = 0;
+    } 
+    let result;
     if (playerSelection === computerSelection){
-        return("Same choice. No points given.");
+        result = "Same choice. No points given.";
     }
     else if ((playerSelection === "rock") & (computerSelection === "paper")){
-        return("You lose! You get 0 score.");
+        result = "You lose! You get 0 score.";
     }
     else if ((playerSelection === "rock") & (computerSelection === "scissors")){
-        return("You win! You get 1 score.");
+        result = "You win! You get 1 score.";
     }
     else if ((playerSelection === "paper") & (computerSelection === "rock")){
-        return("You win! You get 1 score.");
+        result = "You win! You get 1 score.";
     }
     else if ((playerSelection === "paper") & (computerSelection === "scissors")){
-        return("You lose! You get 0 score.");
+        result = "You lose! You get 0 score.";
     }
     else if ((playerSelection === "scissors") & (computerSelection === "paper")){
-        return("You win! You get 1 score.");
+        result = "You win! You get 1 score.";
     }
     else if ((playerSelection === "scissors") & (computerSelection === "rock")){
-        return("You lose! You get 0 score.");
+        result = "You lose! You get 0 score.";
     }
+    keepScore(result);
 }
-function game(){
-    let i = 0;
-    while (i<5){
-        const computerSelection = getComputerChoice();
-        const playerSelection = getPlayerChoice();
-        let result = playRound(playerSelection, computerSelection);
-        console.log(playRound(playerSelection, computerSelection));
-        keepScore(result);
-        i++;
-    }
-}
+    
 let playerScore = 0;
 let computerScore = 0;
 function keepScore(result){
@@ -56,6 +73,10 @@ function keepScore(result){
     }
     else if (result === "You lose! You get 0 score."){
         computerScore += 1;
+    }
+
+    if (playerScore == 5 || computerScore == 5){
+        decideWinner(computerScore, playerScore)
     }
     console.log(computerScore);
     console.log(playerScore);
@@ -72,5 +93,5 @@ function decideWinner(computerScore, playerScore){
         console.log("Result: " + playerScore + " - " + computerScore + "\nYou Have got equal score")
 }
 
-let fiveRounds = game();
+const computerSelection = getComputerChoice();
 let winner = decideWinner(computerScore, playerScore);
