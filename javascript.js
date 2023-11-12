@@ -1,102 +1,84 @@
 let div = document.querySelector('div');
+div.id = 'page';
 
-    let title = document.createElement('div');
-    title.id = 'titulli';
-    title.textContent = 'ROCK-PAPER-SCISSORS Game';
+let title = document.createElement('header');
+title.id = 'titulli';
+title.textContent = 'ROCK-PAPER-SCISSORS Game';
     
-    let btncontainer = document.createElement('div');
-    btncontainer.id = 'container';
-    let scissorsctn = document.createElement('div');
-    scissorsctn.class = 'elements';
-    let rockctn = document.createElement('div');
-    rockctn.class = 'elements';
-    let paperctn = document.createElement('div');
-    paperctn.class = 'elements';
+let btncontainer = document.createElement('div');
+btncontainer.id = 'container';
+let scissorsctn = document.createElement('div');
+scissorsctn.className = 'elements';
+let rockctn = document.createElement('div');
+rockctn.className = 'elements';
+let paperctn = document.createElement('div');
+paperctn.className = 'elements';
 
-    let btnScissors = document.createElement('button');
-    btnScissors.textContent = 'scissors';
-    btnScissors.addEventListener('click', function() {
-        playRound('scissors', getComputerChoice());
-        //console.log( playRound('scissors', getComputerChoice()))
-    });
+let btnScissors = document.createElement('button');
+btnScissors.textContent = 'scissors';
+btnScissors.addEventListener('click', function() {
+    playRound('scissors', getComputerChoice());
+});
     
-    let btnPaper = document.createElement('button');
-    btnPaper.textContent = 'paper';
-    btnPaper.addEventListener('click', function() {
-        playRound('paper', getComputerChoice());
-        //console.log( playRound('paper', getComputerChoice()))
-    });
+let btnPaper = document.createElement('button');
+btnPaper.textContent = 'paper';
+btnPaper.addEventListener('click', function() {
+    playRound('paper', getComputerChoice());
+});
 
-    let btnRock = document.createElement('button');
-    btnRock.textContent = 'rock';
-    btnRock.addEventListener('click', function() {
-        playRound('rock', getComputerChoice());
-        //console.log( playRound('rock', getComputerChoice()))
-    });
+let btnRock = document.createElement('button');
+btnRock.textContent = 'rock';
+btnRock.addEventListener('click', function() {
+    playRound('rock', getComputerChoice());
+});
 
-    let scissorsimg = document.createElement('img');
-    scissorsimg.src = 'https://static.thenounproject.com/png/88666-200.png';
-    scissorsimg.addEventListener('click', function(){
-        btnScissors.click();
-    })
+let scissorsimg = document.createElement('img');
+scissorsimg.src = 'https://static.thenounproject.com/png/88666-200.png';
+scissorsimg.addEventListener('click', function(){
+    btnScissors.click();
+})
 
-    let rockimg = document.createElement('img');
-    rockimg.src = 'https://www.pinclipart.com/picdir/big/536-5360218_rock-paper-scissors-clipart-png-download-paper-rock.png';
-    rockimg.addEventListener('click', function(){
-        btnRock.click();
-    })
+let rockimg = document.createElement('img');
+rockimg.src = 'https://cdn-icons-png.flaticon.com/128/3562/3562093.png';
+rockimg.addEventListener('click', function(){
+    btnRock.click();
+})
 
-    let paperimg = document.createElement('img');
-    paperimg.src = 'https://static.thenounproject.com/png/477922-200.png';
-    paperimg.addEventListener('click',function(){
-        btnPaper.click();
-    })
+let paperimg = document.createElement('img');
+paperimg.src = 'https://static.thenounproject.com/png/477922-200.png';
+paperimg.addEventListener('click',function(){
+    btnPaper.click();
+})
 
-    let scorecontainer = document.createElement('div');
-    scorecontainer.id = 'score';
-    let scorediv = document.createElement('div');
-    let compscorediv = document.createElement('div');
-    let playerscorediv = document.createElement('div');
-    let thewinner = document.createElement('div');
+let scorecontainer = document.createElement('div');
+scorecontainer.id = 'score';
+let scorediv = document.createElement('div');
+scorediv.id = 'scoreid';
+let compscorediv = document.createElement('div');
+let playerscorediv = document.createElement('div');
+let compchoice = document.createElement('div');
+let playerchoice = document.createElement('div');
+let para = document.createElement('p');
+para.textContent = 'Choose your weapon:';
 
-    scissorsctn.appendChild(scissorsimg);
-    scissorsctn.appendChild(btnScissors);
-
-    rockctn.appendChild(rockimg);
-    rockctn.appendChild(btnRock);
-
-    paperctn.appendChild(paperimg);
-    paperctn.appendChild(btnPaper);
-
-    btncontainer.appendChild(scissorsctn);
-    btncontainer.appendChild(rockctn);
-    btncontainer.appendChild(paperctn);
-
-    scorecontainer.appendChild(scorediv);
-    scorecontainer.appendChild(compscorediv);
-    scorecontainer.appendChild(playerscorediv);
-    scorecontainer.appendChild(thewinner);
-
-    div.appendChild(title);
-    div.appendChild(btncontainer);
-    div.appendChild(scorecontainer);
-
-
+let playerChoice;
+let computerChoice;    
 
 //create a function to get a random choice from computer
 function getComputerChoice(){
     let choices = ['rock', 'paper', 'scissors'];
-    let choice = choices[(Math.floor(Math.random() * choices.length))];
-    return choice;
+    let computerChoice = choices[(Math.floor(Math.random() * choices.length))];
+    return computerChoice;
 }
 
 //create a function that plays 1 round of the game with 2 parameters as computers selection and players selection 
 //and than returns a winner
 function playRound(playerSelection, computerSelection){
-    if (playerScore == 5 || computerScore == 5){
-            playerScore = 0;
-            computerScore = 0;
-    } 
+    playerChoice = playerSelection;
+    computerChoice = computerSelection;
+    compchoice.textContent = `Computer's choice: ${computerChoice}`;
+    playerchoice.textContent = `Your choice: ${playerChoice}`;
+
     let result;
     if (playerSelection === computerSelection){
         result = "Same choice. No points given.";
@@ -120,7 +102,7 @@ function playRound(playerSelection, computerSelection){
         result = "You lose! You get 0 score.";
     }
     keepScore(result);
-    scorediv.textContent = result;
+    checkScore(computerScore, playerScore);
 }
     
 let playerScore = 0;
@@ -132,31 +114,72 @@ function keepScore(result){
     else if (result === "You lose! You get 0 score."){
         computerScore += 1;
     }
-
-    if (playerScore == 5 || computerScore == 5){
-        decideWinner(computerScore, playerScore)
-    }
     compscorediv.textContent = `Computer score is : ${computerScore}`;
     playerscorediv.textContent = `Your score is : ${playerScore}`;
-    console.log(computerScore);
-    console.log(playerScore);
+    scorediv.textContent = result;
+
+}
+
+function checkScore(computerScore, playerScore) {
+    if (playerScore == 5 || computerScore == 5){
+        decideWinner(computerScore, playerScore);
+        resetGame();
+    }
 }
 
 function decideWinner(computerScore, playerScore){
     let winner;
     if (computerScore > playerScore){
-        winner ="Result: " + playerScore + " - " + computerScore + "\nYou lost the game!"; 
-        console.log("Result: " + playerScore + " - " + computerScore + "\nYou lost the game!")
+        winner ="Result: " + playerScore + " - " + computerScore + "  \nYou lost the game!"; 
     }
     else if (computerScore < playerScore){
-        winner = "Result: " + playerScore + " - " + computerScore + "\nCongratulations! You won the game."
-        console.log("Result: " + playerScore + " - " + computerScore + "\nCongratulations! You won the game.")
+        winner = "Result: " + playerScore + " - " + computerScore + "  \nCongratulations! You won the game."
     }
-    else
-    winner = "Result: " + playerScore + " - " + computerScore + "\nYou Have got equal score";
-        console.log("Result: " + playerScore + " - " + computerScore + "\nYou Have got equal score")
-        thewinner.textContent = winner;
+
+    let thewinner = document.createElement('div');
+    thewinner.className = 'alert-box';
+    thewinner.textContent =  ` Game Over! ${winner}  Play again!`;
+    document.body.appendChild(thewinner);
+
+    setTimeout(() => {
+        thewinner.remove();
+    }, 2000);
+}
+
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    compscorediv.textContent = '';
+    playerscorediv.textContent = '';
+    compchoice.textContent = '';
+    playerchoice.textContent = '';
+    thewinner.textContent = '';
+    scorediv.textContent = '';
+    
 }
 
 const computerSelection = getComputerChoice();
-//let winner = decideWinner(computerScore, playerScore);
+
+scissorsctn.appendChild(scissorsimg);
+scissorsctn.appendChild(btnScissors);
+
+rockctn.appendChild(rockimg);
+rockctn.appendChild(btnRock);
+
+paperctn.appendChild(paperimg);
+paperctn.appendChild(btnPaper);
+
+btncontainer.appendChild(scissorsctn);
+btncontainer.appendChild(rockctn);
+btncontainer.appendChild(paperctn);
+
+scorecontainer.appendChild(scorediv);
+scorecontainer.appendChild(playerchoice);
+scorecontainer.appendChild(compchoice);
+scorecontainer.appendChild(compscorediv);
+scorecontainer.appendChild(playerscorediv);
+
+div.appendChild(title);
+div.appendChild(para);
+div.appendChild(btncontainer);
+div.appendChild(scorecontainer);

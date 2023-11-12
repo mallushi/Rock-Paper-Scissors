@@ -1,7 +1,10 @@
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    margin: 50px;
+    margin: 0;
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 #container{
@@ -13,14 +16,23 @@ body {
 
 .elements{
     text-align: center;
-    display:block;
+    display:flex;
+    flex-direction: column;
+    margin: 20px;
 }
 
 #titulli {
+    font-weight: 900;
     text-align:center;
-    background-color: black;
     font-size: 50px;
-    color: white
+    background-color: #000;
+    color:aliceblue;
+}
+
+p {
+    font-size: 30px;
+    font-weight: 700;
+    color: red;
 }
 
 img{
@@ -29,8 +41,13 @@ img{
     cursor: pointer;
 }
 
+img:hover {
+    border: 15px solid red;
+    transform: scale(1.05);
+  }
+
 button{
-    border: none;
+    border-radius: 10%;
     padding:10px;
     background-color:black;
     color: aliceblue;
@@ -38,9 +55,29 @@ button{
     margin-bottom: 10px;
 }
 
+button:hover {
+    border: 15px solid red;
+    transform: scale(1.05);
+  }
+
 #score > div{
     text-align: center;
-    justify-items: auto;
-    background-color: black;
-    color: aliceblue;
+    margin: 10px;
+    align-items: center;
+}
+
+#scoreid {
+    color: red;
+    font-size: 30px;
+}
+
+.alert-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #dcdf3b;
+    border: 5px solid #000;
+    text-align: center;
 }
